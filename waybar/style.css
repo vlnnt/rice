@@ -1,0 +1,164 @@
+@import "colors-waybar.css";
+@define-color ws @color4;
+@define-color tt @color1;
+@define-color clock @color3;
+@define-color set @color4;
+@define-color tb rgba(200,200,200,0.2);
+@define-color tbh @color5;
+@define-color text #FFFFFF;
+
+* {
+    border: none;
+    border-radius: 5px;
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 14px;
+    font-style: normal;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(0,0,0,0.3);
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+#workspaces {
+    color: @text;
+    margin: 5px 5px;
+    padding: 3px 5px;
+    border-radius: 16px;
+    font-weight: normal;
+    font-style: normal;
+}
+
+#workspaces button {
+    padding: 0px 5px;
+    margin: 0px 3px;
+    border-radius: 16px;
+    color: @text;
+    transition: all 0.3s ease-in-out;
+}
+
+#workspaces button.active {
+    color: @text;
+    background-color: @ws;
+    border-radius: 16px;
+    min-width: 50px;
+    background-size: 400% 400%;
+    transition: all 0.3s ease-in-out;
+}
+
+#workspaces button:hover {
+    background-color: @text;
+    color: @ws;
+    border-radius: 16px;
+    min-width: 50px;
+    background-size: 400% 400%;
+}
+
+#custom-pacman {
+     background-color: @set;
+    margin: 4px 1px;
+    border-radius: 5px;
+    color: @text;
+    font-weight: bold;
+    padding: 1px 10px 0px 10px;
+}
+
+#custom-pacman.pending-updates {
+    animation-name: blink-update;
+    animation-duration: 3s;
+}
+
+#tray {
+    background: @color0;
+    margin: 5px 5px 5px 5px;
+    border-radius: 16px;
+    padding: 0px 5px;
+}
+
+#clock {
+    background-color: @clock;
+    color: @text;
+    border-radius: 5px;
+    padding: 1px 10px 0px 10px;
+    margin: 4px 1px;
+    opacity: 0.9;
+    border: none;   
+    font-weight: bold;
+}
+
+#battery {
+    background-color: @set;
+    margin: 4px 1px;
+    border-radius: 5px;
+    color: @text;
+    font-weight: bold;
+    padding: 1px 10px 0px 10px;
+}
+
+#battery.charging, #battery.plugged {
+    color: @text;
+    background-color: @set;
+}
+
+#battery.warning:not(.charging) {
+    background-color: #f53c3c;
+    color: @text;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#pulseaudio {
+    background-color: @set;
+    margin: 4px 1px;
+    border-radius: 5px;
+    color: @text;
+    font-weight: bold;
+    padding: 1px 10px 0px 10px;
+}
+
+#language {
+    background-color: @set;
+    margin: 4px 1px;
+    border-radius: 5px;
+    color: @text;
+    font-weight: bold;
+    padding: 1px 10px 0px 10px;
+}
+
+#cpu {
+    background-color: @set;
+    border-radius: 5px;
+    margin: 4px 3px;
+    padding: 0px 10px 0px 10px;
+    font-weight: bold;
+}
+
+#memory {
+    background-color: @set;
+    border-radius: 5px;
+    margin: 4px 3px;
+    padding: 0px 10px 0px 10px;
+    font-weight: bold;
+}
+
+#disk {
+    background-color: @set;
+    border-radius: 5px;
+    margin: 4px 3px;
+    padding: 0px 10px 0px 10px;
+    font-weight: bold;
+}
+
+#custom-logout {
+    background-color: @color1;
+    margin: 4px 1px;
+    border-radius: 5px;
+    color: @text;
+    font-weight: bold;
+    padding: 1px 10px 0px 10px;
+}

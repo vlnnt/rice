@@ -1,0 +1,42 @@
+#!/bin/sh
+
+if ! [ -f "$1" ]; then
+    echo "Error: File $1 not found." >&2
+    exit 1
+fi
+
+cache="/tmp/thumb"
+index="$cache/index-vid.json"
+movie="$(realpath "$1")"
+
+mkdir -p "$cache"
+
+if [ -f "$index" ]; then
+    thumbnail="$(jq -r ".\"$movie\"" <"$index")"
+    if [[ "$thumbnail" != "null" ]]; then
+        if [[ -f "$cache/$thumbnail" ]]; then
+            echo "$cache/$thumbnail"
+            exit 0
+        fi
+    fi
+fi
+
+thumbnail="$(uuidgen)-vid.jpg"
+
+if ! ffmpegthumbnailer -i "$movie" -o "$cache/$thumbnail" -s 0 2>> /tmp/thumb/viderror.log; then
+    echo "Error: Failed to generate thumbnail for video: $movie" >&2
+    exit 1
+fi
+
+if [[ ! -f "$index" ]]; then
+    echo "{\"$movie\": \"$thumbnail\"}" > "$index"
+else
+    json=$(jq -r --arg movie "$movie" --arg thumbnail "$thumbnail" '. + {($movie): $thumbnail}' "$index" 2>> /tmp/thumb/vidjq.log)
+    if [[ $? -ne 0 ]]; then
+        echo "Error: Failed to update index.json with jq" >&2
+        exit 1
+    fi
+    echo "$json" > "$index"
+fi
+
+echo "$cache/$thumbnail"

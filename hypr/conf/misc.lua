@@ -1,0 +1,13 @@
+hl.config({
+    misc = {
+        disable_hyprland_logo = true,
+        disable_splash_rendering = true,
+
+        mouse_move_enables_dpms = true,
+        vrr = 0,
+
+        animate_manual_resizes = true,
+        mouse_move_focuses_monitor = true,
+        enable_swallow = true,
+    },
+})

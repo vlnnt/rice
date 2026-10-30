@@ -1,0 +1,113 @@
+
+{
+    "position": "top",
+    "layer": "top",
+    "height": 16,
+    "margin-top": 0,
+    "margin-bottom": 0,
+    "margin-left": 0,
+    "margin-right": 0,
+
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["cpu", "memory", "disk"],
+    "modules-right": [
+        "tray",
+        "custom/pacman",
+        "hyprland/language",
+        "pulseaudio",
+        "battery",
+        "clock",
+        "custom/logout"
+    ],
+
+    "clock": {
+        "format": " {:%H:%M}",
+        "tooltip": true,
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": " {:%d/%m}"
+    },
+
+    "hyprland/workspaces": {
+        "active-only": false,
+        "all-outputs": true,
+        "disable-scroll": false,
+        "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e+1\" })'",
+        "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e-1\" })'",
+        "format": "{icon}",
+        "on-click": "activate",
+        "sort-by": "number",
+        "format-icons": {
+            "urgent": "",
+            "active": "",
+            "default": ""
+        }
+    },
+
+    "custom/pacman": {
+        "format": "{} {icon}",
+        "return-type": "json",
+        "format-icons": {
+            "pending-updates": " ",
+            "updated": "✓ "
+        },
+        "exec-if": "which waybar-updates",
+        "exec": "waybar-updates"
+    },
+
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon}  {capacity}%",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{icon} {time}",
+        "format-icons": ["", "", "", "", ""]
+    },
+
+    "hyprland/language": {
+        "format": "{}",
+        "format-en": "EN",
+        "format-ru": "RU"
+    },
+
+    "memory": {
+        "format": "󰍛 {}%",
+        "format-alt": "󰍛 {used}/{total} GiB",
+        "interval": 2
+    },
+
+    "cpu": {
+        "format": "󰻠 {usage}%",
+        "format-alt": "󰻠 {avg_frequency} GHz",
+        "interval": 2
+    },
+
+    "disk": {
+        "format": "󰋊 {}%",
+        "format-alt": "󰋊 {used}/{total} GiB",
+        "interval": 2
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 5
+    },
+
+    "pulseaudio": {
+        "scroll-step": 5,
+        "format": "{icon}  {volume}%",
+        "format-icons": {
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+
+    "custom/logout": {
+        "format": "󰈸",
+        "on-click": "~/.config/hypr/scripts/wlogout.sh"
+    }
+}
+

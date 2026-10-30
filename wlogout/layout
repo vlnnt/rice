@@ -1,0 +1,30 @@
+{
+    "label" : "lock",
+    "action" : "loginctl lock-session",
+    "keybind" : "l"
+}
+{
+    "label" : "reboot",
+    "action" : "loginctl reboot",
+    "keybind" : "r"
+}
+{
+    "label" : "shutdown",
+    "action" : "loginctl poweroff",
+    "keybind" : "s"
+}
+{
+    "label" : "logout",
+    "action" : "hyprctl dispatch exit 0",
+    "keybind" : "e"
+}
+{
+    "label" : "suspend",
+    "action" : "loginctl suspend",
+    "keybind" : "u"
+}
+{
+    "label" : "hibernate",
+    "action" : "loginctl hibernate",
+    "keybind" : "h"
+}

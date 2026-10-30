@@ -1,0 +1,80 @@
+# Basic
+set hidden true
+set ignorecase true
+set previewer ~/.config/lf/previewer
+set cleaner ~/.config/lf/cleaner
+
+# Functions
+# drop files
+cmd drop ${{
+    dragon-drop -a "$f"
+}}
+
+# copy
+cmd paste ${{
+    printf "Destination directory: "
+    read destination
+    destination="${destination/#\~/$HOME}"
+    destination=$(realpath "$destination")
+    cp -rn "$f" "$destination"
+}}
+
+# editor
+cmd editor ${{
+    nvim "$f"
+}}
+
+# mkdir
+cmd mkdir ${{
+    printf "Enter directory name: "
+    read ans
+    mkdir $ans
+}}
+
+# mkfile
+cmd mkfile ${{
+    printf "Enter file name: "
+    read ans 
+    nvim $ans
+}}
+
+# extract
+cmd unarchive ${{
+  case "$f" in
+      *.zip) unzip "$f" ;;
+      *.tar.gz) tar -xzvf "$f" ;;
+      *.tar.bz2) tar -xjvf "$f" ;;
+      *.tar) tar -xvf "$f" ;;
+      *.7z) 7z e "$f" ;;
+      *) echo "Unsupported format!" ;;
+  esac
+}}
+
+# Movement
+map gh cd ~
+map gc cd ~/.config
+map gd cd ~/Downloads
+map gp cd ~/Programming
+map ga cd ~/Games
+map gb cd ~/Books 
+map gl cd ~/.config/lf
+map gv cd ~/Videos
+map go cd ~/Documents
+map gk cd ~/Store
+
+# Bindings
+map d 
+map m
+map r
+map c
+
+# Bind Functions
+map cp copy
+map dd drop
+map au unarchive
+map md mkdir
+map mf mkfile
+map ae editor
+map mp paste
+map rf !read -p "Delete file '$f'? [y/N] " && [ "$REPLY" = "y" ] && shred -u "$f"
+map rc !read -p "Delete directory '$f'? [y/N] " && [ "$REPLY" = "y" ] && rm -r "$f"
